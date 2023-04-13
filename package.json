@@ -4,7 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "dev": "ts-node-dev --respawn --transpile-only ./app.ts"
+        "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
     },
     "dependencies": {
         "@types/bcrypt": "^5.0.0",

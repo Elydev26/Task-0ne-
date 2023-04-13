@@ -1,7 +1,7 @@
 export default{
-    PORT : 8080,
+    PORT: 8080,
     host : "localhost",
-    dbUri: "",
+    dbUri: "mongodb+srv://adewunmi:ELYDEV@auth.xzfasts.mongodb.net/?retryWrites=true&w=majority",
     saltfactor: 10,
     accessTokenTtl: "1h"
     // refreshTokenTtl: "1y"
