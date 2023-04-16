@@ -1,7 +1,5 @@
 import userModel, { IUser } from "../models/user.model";
 
-
-
 export async function createUser(userInput: IUser) {
     try {
         let user = await userModel.findOne({ email: userInput.email })
@@ -14,7 +12,6 @@ export async function createUser(userInput: IUser) {
         throw new Error(error)
     }
 }
-
 export async function currentUser({ email, password }: { email: string, password: string }) {
     const user = await userModel.findOne({ email: email })
     console.log(user)

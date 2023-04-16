@@ -1,16 +1,15 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response } from 'express'
 import  bcrypt from 'bcrypt'
-// import config from 'config'
-import { createUser, currentUser } from '../validator/usersvalidator'
+import { createUser, currentUser } from '../service/user.service'
 import userModel from '../models/user.model';
 import dotenv from 'dotenv'
 import { APP_SECRET } from '../config/config';
 dotenv.config()
 
 export async function register(req: Request, res: Response) {
+    
     // Validating users input
-    // console.log(req.body)
     const errors = createUser(req.body)
         
       const {  userName, email, password, } = req.body;
@@ -45,7 +44,7 @@ export async function userLogin(req: Request, res: Response) {
          
     } else {
         console.log(password, existingUser);
-        let isPasswordValid = bcrypt.compareSync(password, existingUser.password)
+        const isPasswordValid = bcrypt.compareSync(password, existingUser.password)
 
         //    const dbResponse = await existingUser.save()
         //    console.log('this is the db response --', dbResponse)
@@ -53,10 +52,9 @@ export async function userLogin(req: Request, res: Response) {
         if (isPasswordValid == true) {
             const token = jwt.sign({ id: existingUser._id, email: existingUser.email }, APP_SECRET as string)
             return res.status(200).json({
-                token,
+                // token,
                 message: "Login successfully",
                 status: true,
-                role: existingUser,
             });
         } else {
             return res.status(400).json({
