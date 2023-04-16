@@ -1,5 +1,3 @@
-node_module/
-/.env
-/config/default
+/node_modules
 /.env
 /.NOTE
