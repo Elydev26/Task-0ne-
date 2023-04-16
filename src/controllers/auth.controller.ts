@@ -6,9 +6,6 @@ import { createUser, currentUser } from '../validator/usersvalidator'
 import userModel from '../models/user.model';
 import dotenv from 'dotenv'
 import { APP_SECRET } from '../config/config';
-import validateReq from '../middleware/validateReq.body';
-
-
 dotenv.config()
 
 export async function register(req: Request, res: Response) {
@@ -36,7 +33,6 @@ export async function register(req: Request, res: Response) {
 
 export async function userLogin(req: Request, res: Response) {
 
-             console.log(req.body)
       const errors = currentUser(req.body)
     const { email, password } = req.body
    
@@ -51,8 +47,8 @@ export async function userLogin(req: Request, res: Response) {
         console.log(password, existingUser);
         let isPasswordValid = bcrypt.compareSync(password, existingUser.password)
 
-           const dbResponse = await existingUser.save()
-           console.log('this is the db response --', dbResponse)
+        //    const dbResponse = await existingUser.save()
+        //    console.log('this is the db response --', dbResponse)
 
         if (isPasswordValid == true) {
             const token = jwt.sign({ id: existingUser._id, email: existingUser.email }, APP_SECRET as string)
