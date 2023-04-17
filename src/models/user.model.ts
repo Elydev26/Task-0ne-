@@ -1,18 +1,20 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 import config from 'config'
-import { Timestamp } from "typeorm"
+import dotenv from 'dotenv'
+import { saltFactor } from '../config/config';
+dotenv.config()
 
 export interface IUser extends mongoose.Document {
-    name: string,
+    userName: string,
     password: string,
     email: string,
-    comparePasswoerd(password:string):Promise<Boolean>
+    comparePassword(password: string): Promise<Boolean>
 }
 
 const userSchema = new mongoose.Schema<IUser>({
-    name:{
-        type: String, 
+    userName: {
+        type: String,
         required: true
     },
     email: {
@@ -22,32 +24,33 @@ const userSchema = new mongoose.Schema<IUser>({
     },
     password: {
         type: String,
-        required: true,
-        minlength: 15
+        required: true
     }
 }, {
     timestamps: true
-}
-)
+})
 
-userSchema.pre<IUser>('save', async function (next){
-    if(!this.isModified('password')) {
+userSchema.pre<IUser>('save', async function (next) {
+    if (!this.isModified('password')) {
         return next()
     }
-
-    const salt = await bcrypt.genSalt(config.get<number>("saltFactor"))
+    const saltFactor = 10
+    const salt = await bcrypt.genSalt(saltFactor as number)
     const hashedPassword = await bcrypt.hash(this.password, salt)
     this.password = hashedPassword
     next()
 })
 
-userSchema.methods.comparePasswoerd = async function (inputPassword: string): Promise<Boolean> {
+userSchema.methods.comparePassword = async function (inputPassword: string): Promise<Boolean> {
     console.log(this.password)
     const isValid = await bcrypt.compare(inputPassword, this.password)
     return isValid
 }
 
-const userModel = mongoose.model('Users', userSchema)
 
-export default userModel
+const User = mongoose.model('Users', userSchema)
+
+export default User
+
+
 
