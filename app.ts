@@ -1,13 +1,14 @@
 import express from 'express'
 import config from 'config'
-import connect from '../util/db'
-import userRoute from '../routes/user.routes'
+import connect from './src/util/db'
+import userRoute from './src/routes/user.routes'
+
 
 
 const app = express()
 const PORT = config.get<number>("PORT")
 
-app.listen(PORT, async() =>{
+app.listen(PORT, async() => {
     console.log(`server running on http://localhost:${PORT}`)
 
     await connect()

@@ -1,6 +1,6 @@
 import { Request, Response} from 'express'
-import {IUser} from '../model/user.model'
-import { createUser} from '../service/user-service'
+import {IUser} from '../src/model/user.model'
+import { createUser} from '../src/service/user-service'
 
 export async function createUserHandler(req: Request, res:  Response) {
     try{

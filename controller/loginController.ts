@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { IUser } from '../model/user.model';
-import { validateUser } from '../service/user-service';
-import { signjwt } from '../util/jwt';
+import { IUser } from '../src/model/user.model';
+import { validateUser } from '../src/service/user-service';
+import { signjwt } from '../src/util/jwt';
 
 
 export async function loginUserHandler(req: Request, res: Response)  {

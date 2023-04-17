@@ -1,8 +1,8 @@
 import express, { Router } from 'express'
 import validateReq from '../middlewares/vallidateRequestBody'
 import userSchema, { userSigninSchema } from '../schema/user.schema'
-import { createUserHandler,  } from '../controller/createUserController'
-import { loginUserHandler } from '../controller/loginController'
+import { createUserHandler,  } from '../../controller/createUserController'
+import { loginUserHandler } from '../../controller/loginController'
 
 
 
