@@ -28,9 +28,7 @@ const userSchema = new mongoose.Schema<IUser>({
     }
 }, {
     timestamps: true
-}
-)
-// config.get<number>("saltFactor")
+})
 
 userSchema.pre<IUser>('save', async function (next) {
     if (!this.isModified('password')) {

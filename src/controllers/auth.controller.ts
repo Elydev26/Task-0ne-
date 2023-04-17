@@ -7,6 +7,8 @@ import dotenv from 'dotenv'
 import { APP_SECRET } from '../config/config';
 dotenv.config()
 
+
+// USER REGISTER CONTROLLER......
 export async function register(req: Request, res: Response) {
     
     // Validating users input
@@ -20,15 +22,19 @@ export async function register(req: Request, res: Response) {
         password: bcrypt.hashSync(password, 1),
         
     })
-    // const dbResponse = await newUser.save()
-    // console.log('this is the db response --', dbResponse)
-       
+    
     // Generate a JWT token for the new user
-    const token = jwt.sign({ _id: newUser._id }, APP_SECRET as string, {
+    const token = 
+    jwt.sign({ _id: newUser._id },
+         APP_SECRET as string, {
         expiresIn: "1h",
+         algorithm: "HS256"
     });
     res.status(201).json({ message: "User registered", token })
 }
+
+
+// USERLOGIN CONTROLLER
 
 export async function userLogin(req: Request, res: Response) {
 
@@ -45,16 +51,17 @@ export async function userLogin(req: Request, res: Response) {
     } else {
         console.log(password, existingUser);
         const isPasswordValid = bcrypt.compareSync(password, existingUser.password)
-
-        //    const dbResponse = await existingUser.save()
-        //    console.log('this is the db response --', dbResponse)
-
+        
         if (isPasswordValid == true) {
-            const token = jwt.sign({ id: existingUser._id, email: existingUser.email }, APP_SECRET as string)
+            const token = 
+            jwt.sign({ id: existingUser._id,
+                 email: existingUser.email },
+                  APP_SECRET as string)
             return res.status(200).json({
                 // token,
                 message: "Login successfully",
                 status: true,
+               // role: existingUser
             });
         } else {
             return res.status(400).json({
