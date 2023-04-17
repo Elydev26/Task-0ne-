@@ -1,10 +1,10 @@
 {
-    "name": "Task-One-U",
+    "name": "Task-One-",
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
+        "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
     },
     "devDependencies": {
         "@types/bcrypt": "^5.0.0",
