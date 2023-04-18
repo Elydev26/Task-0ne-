@@ -3,9 +3,9 @@ import joi from 'joi'
 
 
 
-const loginHandler = (userloginSchema: joi.Schema) => (req: Request, res: Response, next: NextFunction) => {
+const loginHandler = (userLoginSchema: joi.Schema) => (req: Request, res: Response, next: NextFunction) => {
 
-    const { error } = userloginSchema.validate(req)
+    const { error } = userLoginSchema.validate(req)
     //  console.log("these is the response----->", error?.message)
     if (error) {
 
