@@ -11,7 +11,7 @@ app.use(express.json())
 const startApp = async () => {
     mongoose.set('strictQuery', false)
     await mongoose.connect(DB as string, {
-        dbName: "auth_db",
+        dbName: "Auth_db",
     })
         .then(() => {
             console.log("DB CONNECTION SUCCESSFUL!");

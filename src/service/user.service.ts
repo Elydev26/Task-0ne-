@@ -16,9 +16,9 @@ export async function currentUser({ email, password }: { email: string, password
     const user = await userModel.findOne({ email: email })
     console.log(user)
 
-    if (!user) return false
+    if (!user) throw new Error ("User email does not exist pls check!!!")
     const isValid = await user.comparePassword(password)
-    if (!isValid) return false
+    if (!isValid) throw new Error ("User password  failed!!!")
     return ((user.toJSON()))
 
 }

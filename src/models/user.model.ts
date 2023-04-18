@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
-import config from 'config'
 import dotenv from 'dotenv'
 import { saltFactor } from '../config/config';
 dotenv.config()
